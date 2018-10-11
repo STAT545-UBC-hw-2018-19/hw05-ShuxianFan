@@ -1,0 +1,8 @@
+---
+title: "Homework 05: Factor and figure management"
+author: "**Shuxian Fan**"
+date: "Oct 11th, 2018"
+output: github_document 
+---
+
+## section  
