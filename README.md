@@ -17,11 +17,11 @@ The goals of this homework are:
 
 Here are the links for the corresponding files:
 
-:star: [**HTML_Preview**]() 
+:star: [**HTML_Preview**](http://htmlpreview.github.io/?https://github.com/STAT545-UBC-students/hw05-ShuxianFan/blob/master/hw05_fct_fig_mgmt.html) 
 
-[hw05]()
+[hw05_Rmd](https://github.com/STAT545-UBC-students/hw05-ShuxianFan/blob/master/hw05_fct_fig_mgmt.Rmd)
 
-[hw05]()
+[hw05_html](https://github.com/STAT545-UBC-students/hw05-ShuxianFan/blob/master/hw05_fct_fig_mgmt.html)
 
 
 ## _For the peer reviewer_: 
