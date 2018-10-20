@@ -383,7 +383,6 @@ ggsave("./test_plot.png")
 ```
 ![](./test_plot.png)
 
-## "But I want to do more!" - Make a deeper exploration of the forcats packages
 
 ## Reference and Source
 
