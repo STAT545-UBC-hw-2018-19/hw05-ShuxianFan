@@ -22,6 +22,12 @@ suppressPackageStartupMessages(library(ggthemes))
 suppressPackageStartupMessages(library(kableExtra))
 suppressPackageStartupMessages(library(gridExtra))
 suppressPackageStartupMessages(library(grid))
+suppressPackageStartupMessages(library(scales))
+suppressPackageStartupMessages(library(plotly))
+# Source: https://github.com/dgrtwo/gganimate
+# install.packages("cowplot")  # a gganimate dependency
+# devtools::install_github("dgrtwo/gganimate")
+# suppressPackageStartupMessages(library(gganimate))
 ```
 
 
@@ -268,13 +274,120 @@ head(levels(import_rds$country))
 ## Part 3: Visualization Design
 **_Task Description_**: _Remake at least one figure or create a new one, in light of something you learned in the recent class meetings about visualization design and color. Reflect on the differences of your first attempt and what you obtained after some time spent working on it. If using Gapminder, you can use the country or continent color scheme that ships with Gapminder. Then, make a new graph by converting this visual to a `plotly` graph. What are some things that `plotly` makes possible, that are not possible with a regular `ggplot2` graph?_
 
+```{r, message=FALSE}
+# original plot from homework2
+gapminder %>% ggplot(aes(gdpPercap, lifeExp)) + scale_x_log10()+
+  geom_point() + 
+  geom_smooth() + 
+  facet_wrap(~continent, ncol=3)
+```
+
+For this part, first I will start by cleaning the a plot from homework2 and try out the theming. First I add labels and title using the `labs()` function, then I added the black and white theme using `theme_bw()`, then I adjust the theme using `theme()` function to adjust the text size and color in the axis as well as change the color of background. Now the plot has more information based on the continent color and the dollar sign in the x axis can reflect more information of the dataset.
+
+```{r, message=FALSE}
+# changing the look of the graphic using theme() layer
+(plot5 <- gapminder %>% ggplot(aes(gdpPercap, lifeExp)) + 
+  scale_x_log10(labels= dollar_format())+
+  geom_point(alpha = 0.3, aes(color = continent))+ 
+  geom_smooth() + 
+  facet_wrap(~continent, ncol=3)+
+  labs(x = "GDP per capita",
+       y = "Life Expectancy",
+       title = "Plot for GDP per capita versus life expectancy in the five continents" )+
+  theme_bw()+
+  theme(axis.text = element_text(size = 8),
+        strip.background = element_rect(fill = "green4"),
+        strip.text = element_text(color = "white")))
+```
+
+
+I will create another plot and make use of the what I have learned in the recent class meetings about visualization design and color to make it more effective. 
+
+```{r}
+(plot4 <-
+  gapminder %>% 
+  # get only the countries of interest
+  filter(country %in% c("Thailand", "Vietnam"))%>%
+  ggplot(aes(gdpPercap, lifeExp, shape = country, color = pop))+
+  # scale the gdpPercap
+  scale_x_log10(labels = dollar_format())+
+  geom_point(aes(size = pop))+ 
+  scale_size_area()+
+  scale_color_gradient(low = "#0091ff", high = "#f0650e")+
+  # add labels and title
+  labs(x = "GDP per capita",
+       y = "Life Expectancy",
+       title = "Plot for GDP per capita versus life expectancy of Thailand and Vietnam" )+
+  # add theme
+  theme_bw())
+
+```
+
+Next, I will convert the plot4 (GDP per capita versus life expectancy of Thailand and Vietnam) and plot5 (GDP per capita versus life expectancy in the five continents) into plotly.
+
+In general, `plotly` provides us a toolbar to interact with the plot. We could zoom in and out and even directly download the plot. Moreover, by hovering close to the data point, plotly plot will automatically show detailed information of this datapoint. From the plot by converting plot5 I found a very useful function `plotly` provides, which is that if you click on the continent legend on the right, `plotly` will remove all the points on the corresponding plot. This is useful if you want to take a closer look at the smooth line as well as if you have overlapping plots. In light of this finding, I found that the `plotly` has the highlighting function, which is very useful for interacting with the plot as well as in making the animation. 
+
+In terms of animation in R, I also found a package called `gganimate`, I did try out a few example plots but I found it slower than making animation using `plotly`. `gganimate` is useful for making gif while I think `plotly` is more powerful as it provide a way for users to interact with the plot, which is extremely useful when we want to make higher dimensional plots. 
+
+```{r}
+# convert plot 4 and 5 into plotly
+plotly::ggplotly(plot4)
+
+plotly::ggplotly(plot5)
+```
+
+
+
+```{r, message=FALSE}
+g <- crosstalk::SharedData$new(gapminder, ~continent)
+plot6 <- ggplot(g, aes(gdpPercap, lifeExp, color = continent, frame = year)) +
+  geom_point(aes(size = pop, ids = country)) +
+  geom_smooth(se = FALSE, method = "lm") +
+  scale_x_log10(labels= dollar_format())+
+  theme_bw()+
+  labs(title = "Plot for GDP per capita versus life expectancy \n for different continents",
+       x = "GDP per capita",
+       y = "Life Expectancy")
+plotly::ggplotly(plot6) %>% 
+  plotly::highlight("plotly_hover")
+```
+
 
 ## Part 4: Writing figures to file
+**_Task Description_**: _Use ggsave() to explicitly save a plot to file. Then use ![Alt text](/path/to/img.png) to load and embed it in your report. You can play around with various options_
 
+I will export the plot4 (GDP per capita versus life expectancy of Thailand and Vietnam) and plot5 (GDP per capita versus life expectancy in the five continents) using `ggsave()` to `png` formatted figure.
+
+```{r}
+# ggsave without specifying width and height.
+ggsave("gdpPercap_vs_lifeExp_Thai_Viet.png", plot = plot4)
+
+# ggsave with specifying width and height
+ggsave("gdpPercap_vs_lifeExp_Thai_Viet_wh.png", plot = plot4, width = 5, height = 5)
+
+# ggsave with scale
+ggsave("gdpPercap_vs_lifeExp_Thai_Viet_sc.png", plot = plot4, width = 10, height = 10, scale = 0.5)
+```
+
+Now reload the data to see the result:
 
 
 ## "But I want to do more!" - Make a deeper exploration of the forcats packages
 
 ## Reference and Source
 
+(1) Sequential, diverging and qualitative colour scales from colorbrewer.org
 
+    <https://ggplot2.tidyverse.org/reference/scale_brewer.html>
+    
+(2) Top 50 ggplot2 Visualizations - The Master List (With Full R Code)
+    
+    <http://r-statistics.co/Top50-Ggplot2-Visualizations-MasterList-R-Code.html>
+
+(3) gganimate vs. plotly - Which is better at animation?
+  
+    <https://www.brucemeng.ca/post/animations-in-r/>
+    
+(4) Intro to Animations in R
+  
+    <https://plot.ly/r/animations/>
