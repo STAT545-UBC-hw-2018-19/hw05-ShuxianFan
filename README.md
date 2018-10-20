@@ -29,7 +29,7 @@ In this homework, I finished:
 
 Here are the links for the corresponding files:
 
-:star: [**HTML_Preview**](https://raw.githack.com/STAT545-UBC-students/hw05-ShuxianFan/master/hw05_fct_fig_mgmt.html) 
+:star: [**HTML_Preview**](https://rawcdn.githack.com/STAT545-UBC-students/hw05-ShuxianFan/master/hw05_fct_fig_mgmt.html) 
 
 [hw05_Rmd](https://github.com/STAT545-UBC-students/hw05-ShuxianFan/blob/master/hw05_fct_fig_mgmt.Rmd)
 
@@ -45,7 +45,7 @@ This is because the size of the file I generated is too large for GitHub to enab
 
 You could view the content by the: 
 
-[**HTML_Preview**](https://raw.githack.com/STAT545-UBC-students/hw05-ShuxianFan/master/hw05_fct_fig_mgmt.html)
+[**HTML_Preview**](https://rawcdn.githack.com/STAT545-UBC-students/hw05-ShuxianFan/master/hw05_fct_fig_mgmt.html)
 ,which I created using [raw.githack.com](https://raw.githack.com).
 
 OR:
