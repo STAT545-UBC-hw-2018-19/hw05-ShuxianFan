@@ -360,18 +360,19 @@ I will export the plot4 (GDP per capita versus life expectancy of Thailand and V
 
 ```{r}
 # ggsave without specifying width and height.
-ggsave("gdpPercap_vs_lifeExp_Thai_Viet.png", plot = plot4)
+ggsave("./gdpPercap_vs_lifeExp_Thai_Viet.png", plot = plot4)
 
 # ggsave with specifying width and height
-ggsave("gdpPercap_vs_lifeExp_Thai_Viet_wh.png", plot = plot4, width = 5, height = 5)
+ggsave("./gdpPercap_vs_lifeExp_Thai_Viet_wh.png", plot = plot4, width = 5, height = 5)
 
 # ggsave with scale
-ggsave("gdpPercap_vs_lifeExp_Thai_Viet_sc.png", plot = plot4, width = 10, height = 10, scale = 0.5)
+ggsave("./gdpPercap_vs_lifeExp_Thai_Viet_sc.png", plot = plot4, width = 5, height = 5, scale = 2)
 ```
 
 Now reload the data to see the result:
-
-
+![](./gdpPercap_vs_lifeExp_Thai_Viet.png)
+![](./gdpPercap_vs_lifeExp_Thai_Viet_wh.png)
+![](./gdpPercap_vs_lifeExp_Thai_Viet_sc.png)
 ## "But I want to do more!" - Make a deeper exploration of the forcats packages
 
 ## Reference and Source
