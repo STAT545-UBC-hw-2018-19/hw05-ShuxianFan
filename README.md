@@ -22,7 +22,7 @@ In this homework, I finished:
 
 * Part 2: File I/O
 
-* Part 3: Part 3: Visualization Design
+* Part 3: Visualization Design
 
 * Part 4: Writing figures to file
 
