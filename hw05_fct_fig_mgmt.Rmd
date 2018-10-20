@@ -370,6 +370,7 @@ ggsave("./gdpPercap_vs_lifeExp_Thai_Viet_sc.png", plot = plot4, width = 5, heigh
 ```
 
 Now reload the data to see the result:
+
 ![](./gdpPercap_vs_lifeExp_Thai_Viet.png)
 ![](./gdpPercap_vs_lifeExp_Thai_Viet_wh.png)
 ![](./gdpPercap_vs_lifeExp_Thai_Viet_sc.png)
