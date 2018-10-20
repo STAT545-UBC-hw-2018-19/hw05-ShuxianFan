@@ -354,7 +354,7 @@ plotly::ggplotly(plot6) %>%
 
 
 ## Part 4: Writing figures to file
-**_Task Description_**: _Use ggsave() to explicitly save a plot to file. Then use ![Alt text](/path/to/img.png) to load and embed it in your report. You can play around with various options_
+**_Task Description_**: _Use ggsave() to explicitly save a plot to file and reload it._
 
 I will export the plot4 (GDP per capita versus life expectancy of Thailand and Vietnam) and plot5 (GDP per capita versus life expectancy in the five continents) using `ggsave()` to `png` formatted figure.
 
@@ -363,17 +363,26 @@ I will export the plot4 (GDP per capita versus life expectancy of Thailand and V
 ggsave("./gdpPercap_vs_lifeExp_Thai_Viet.png", plot = plot4)
 
 # ggsave with specifying width and height
-ggsave("./gdpPercap_vs_lifeExp_Thai_Viet_wh.png", plot = plot4, width = 5, height = 5)
+ggsave("./gdpPercap_vs_lifeExp_Thai_Viet_wh.png", plot = plot4, width = 8, height = 8)
 
 # ggsave with scale
-ggsave("./gdpPercap_vs_lifeExp_Thai_Viet_sc.png", plot = plot4, width = 5, height = 5, scale = 2)
+ggsave("./gdpPercap_vs_lifeExp_Thai_Viet_sc.png", plot = plot4, width = 3, height = 3, scale = 2)
 ```
 
 Now reload the data to see the result:
-
 ![](./gdpPercap_vs_lifeExp_Thai_Viet.png)
+
 ![](./gdpPercap_vs_lifeExp_Thai_Viet_wh.png)
+
 ![](./gdpPercap_vs_lifeExp_Thai_Viet_sc.png)
+
+If I display a former plot, say plot1, if we don't specify the plot name in `ggsave()`, I found that `ggsave()` will save the plot we just displayed.
+```{r}
+plot1
+ggsave("./test_plot.png")
+```
+![](./test_plot.png)
+
 ## "But I want to do more!" - Make a deeper exploration of the forcats packages
 
 ## Reference and Source
